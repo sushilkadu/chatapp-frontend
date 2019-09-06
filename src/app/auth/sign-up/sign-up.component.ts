@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, EventEmitter, Output } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { AuthService } from "../auth-service/auth.service"
 import { first } from "rxjs/operators"
+import { User } from "src/app/model/user"
 
 @Component({
   selector: "app-sign-up",
@@ -9,6 +10,8 @@ import { first } from "rxjs/operators"
   styleUrls: ["./sign-up.component.css"]
 })
 export class SignUpComponent implements OnInit {
+  @Output() signedUp = new EventEmitter<User>()
+
   registerForm: FormGroup
 
   /** Hides password by default */
@@ -62,6 +65,11 @@ export class SignUpComponent implements OnInit {
         user => {
           console.log("Successfully subscribed to platform: ", user)
           this.signInRequestInProgress = false
+
+          this.registerForm.reset()
+
+          this.signedUp.emit(user)
+          // TODO should emit an event that registration was successful
         },
         error => {
           console.log("Error during subscription: ", error)
