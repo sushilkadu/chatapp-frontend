@@ -7,6 +7,7 @@ import { MaterialModule } from "../material/material.module"
 import { LoginComponent } from "./login/login.component"
 import { SignUpComponent } from "./sign-up/sign-up.component"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { HttpClientModule } from "@angular/common/http"
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, SignUpComponent],
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ]
 })
 export class AuthModule {}

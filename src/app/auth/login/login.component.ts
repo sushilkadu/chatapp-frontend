@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { filter, map, take, toArray, first } from "rxjs/operators"
+import { AuthService } from '../auth-service/auth.service';
 
 @Component({
   selector: "app-login",
@@ -13,14 +14,16 @@ export class LoginComponent implements OnInit {
   /** Hides password by default */
   hide = true
 
-  /* Pattern for password */
-  pwdPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"
+  /* Pattern for password
+   * (?=.*[@#$%])
+   */
+  pwdPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"
 
   loginError = false
 
   constructor(
-    private formBuilder: FormBuilder /*,
-    private authService: AuthService*/
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {

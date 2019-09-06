@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
+import { AuthService } from "../auth-service/auth.service"
+import { first } from "rxjs/operators"
 
 @Component({
   selector: "app-sign-up",
@@ -12,36 +14,59 @@ export class SignUpComponent implements OnInit {
   /** Hides password by default */
   hide = true
 
-  /* Pattern for password */
-  pwdPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"
+  signInRequestInProgress = false
 
-  constructor(private formBuilder: FormBuilder) {}
+  /* Pattern for password
+   * (?=.*[@#$%])
+   */
+  pwdPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstNameFormControl: ["", [Validators.required]],
-      lastNameFormControl: ["", [Validators.required]],
-      emailFormControl: ["", [Validators.required, Validators.email]],
-      passwordFormControl: [
-        "",
-        [Validators.required, Validators.pattern(this.pwdPattern)]
-      ]
+      firstName: ["", [Validators.required]],
+      lastName: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.pattern(this.pwdPattern)]]
     })
   }
 
-  get firstNameFormControl() {
-    return this.registerForm.get("firstNameFormControl")
+  get firstName() {
+    return this.registerForm.get("firstName")
   }
 
-  get lastNameFormControl() {
-    return this.registerForm.get("lastNameFormControl")
+  get lastName() {
+    return this.registerForm.get("lastName")
   }
 
-  get emailFormControl() {
-    return this.registerForm.get("emailFormControl")
+  get email() {
+    return this.registerForm.get("email")
   }
 
-  get passwordFormControl() {
-    return this.registerForm.get("passwordFormControl")
+  get password() {
+    return this.registerForm.get("password")
+  }
+
+  onSignUp() {
+    // make progressbar visible
+    this.signInRequestInProgress = true
+
+    this.authService
+      .register(this.registerForm.value)
+      .pipe(first())
+      .subscribe(
+        user => {
+          console.log("Successfully subscribed to platform: ", user)
+          this.signInRequestInProgress = false
+        },
+        error => {
+          console.log("Error during subscription: ", error)
+          this.signInRequestInProgress = false
+        }
+      )
   }
 }
