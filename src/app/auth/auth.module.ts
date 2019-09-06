@@ -8,6 +8,7 @@ import { LoginComponent } from "./login/login.component"
 import { SignUpComponent } from "./sign-up/sign-up.component"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { HttpClientModule } from "@angular/common/http"
+import { MiscModule } from "../misc/misc.module"
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, SignUpComponent],
@@ -17,7 +18,8 @@ import { HttpClientModule } from "@angular/common/http"
     ReactiveFormsModule,
     AuthRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    MiscModule
   ]
 })
 export class AuthModule {}

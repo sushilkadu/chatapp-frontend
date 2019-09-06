@@ -8,6 +8,8 @@ import { AuthModule } from "./auth/auth.module"
 import { MaterialModule } from "./material/material.module"
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
+import { MiscModule } from "./misc/misc.module"
+import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material"
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -18,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
     AuthModule,
     MaterialModule
   ],
-  providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {}

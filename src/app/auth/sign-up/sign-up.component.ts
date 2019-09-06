@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { AuthService } from "../auth-service/auth.service"
 import { first } from "rxjs/operators"
 import { User } from "src/app/model/user"
+import { MatDialog } from "@angular/material"
+import { ErrorDialogComponent } from "src/app/misc/error-dialog/error-dialog.component"
 
 @Component({
   selector: "app-sign-up",
@@ -26,7 +28,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -74,7 +77,27 @@ export class SignUpComponent implements OnInit {
         error => {
           console.log("Error during subscription: ", error)
           this.signInRequestInProgress = false
+          let title
+          let description
+          if (error.status && error.status === 409) {
+            title = "Email already exists!"
+            description =
+              "You are already registered on the platform, please try forgot password option to recover your password"
+          } else {
+            title = "Error creating user"
+            description =
+              "There was an error creating your account, please try again!"
+          }
+
+          this.openErrorDialog(title, description)
         }
       )
+  }
+
+  openErrorDialog(title: string, description: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      width: "350px",
+      data: { title, description }
+    })
   }
 }
