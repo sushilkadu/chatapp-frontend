@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
     // check if token is available
     if (this.tokenService.isLoggedIn()) return true
 
-    this.router.navigate(["auth"])
+    this.router.navigate(["auth"], { queryParams: { returnUrl: state.url } })
     return false
   }
 }

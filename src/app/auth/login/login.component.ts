@@ -6,6 +6,7 @@ import { Token } from "src/app/model/token"
 import { MatDialog } from "@angular/material"
 import { ErrorDialogComponent } from "src/app/misc/error-dialog/error-dialog.component"
 import { TokenService } from "../token-service/token.service"
+import { Router, ActivatedRoute } from "@angular/router"
 
 @Component({
   selector: "app-login",
@@ -25,11 +26,15 @@ export class LoginComponent implements OnInit {
 
   loginError = false
 
+  returnUrl: string
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private dialog: MatDialog,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -40,6 +45,8 @@ export class LoginComponent implements OnInit {
         [Validators.required, Validators.pattern(this.pwdPattern)]
       ]
     })
+
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/"
   }
 
   get emailFormControl() {
@@ -60,6 +67,8 @@ export class LoginComponent implements OnInit {
         (token: Token) => {
           console.log("User is logged in: " + token.token)
           this.tokenService.saveToken(token.token)
+
+          this.router.navigate([this.returnUrl])
         },
         error => {
           this.loginError = true
