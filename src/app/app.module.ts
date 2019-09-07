@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { MiscModule } from "./misc/misc.module"
 import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material"
+import { HomeModule } from "./home/home.module"
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -18,7 +19,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material"
     BrowserAnimationsModule,
     AppRoutingModule,
     AuthModule,
-    MaterialModule
+    MaterialModule,
+    HomeModule
   ],
 
   bootstrap: [AppComponent]

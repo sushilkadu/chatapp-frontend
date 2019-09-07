@@ -4,6 +4,7 @@ import { Observable } from "rxjs"
 import { HttpClient } from "@angular/common/http"
 import { environment } from "src/environments/environment"
 import { User } from "src/app/model/user"
+import { Token } from "src/app/model/token"
 
 @Injectable({
   providedIn: "root"
@@ -16,8 +17,8 @@ export class AuthService {
    * @param email Registered e-mail address
    * @param password Password associated with registered email address
    */
-  login(email: string, password: string): Observable<UserRegister> {
-    return this.http.post<UserRegister>(`${environment.BASE_URL}/login`, {
+  login(email: string, password: string): Observable<Token> {
+    return this.http.post<Token>(`${environment.BASE_URL}/login`, {
       email,
       password
     })

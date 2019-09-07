@@ -4,6 +4,10 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 
 const routes: Routes = [
   {
+    path: "",
+    loadChildren: () => import("./home/home.module").then(mod => mod.HomeModule)
+  },
+  {
     path: "auth",
     loadChildren: () => import("./auth/auth.module").then(mod => mod.AuthModule)
   },
