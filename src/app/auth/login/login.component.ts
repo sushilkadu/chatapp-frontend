@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
 
   returnUrl: string
 
+  loginRequestInProgress = false
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -60,17 +62,21 @@ export class LoginComponent implements OnInit {
   onLoginClicked() {
     console.log("Calling auth service")
 
+    this.loginRequestInProgress = true
+
     this.authService
       .login(this.emailFormControl.value, this.passwordFormControl.value)
       .pipe(first())
       .subscribe(
         (token: Token) => {
-          console.log("User is logged in: " + token.token)
+          this.loginRequestInProgress = false
           this.tokenService.saveToken(token.token)
 
           this.router.navigate([this.returnUrl])
         },
         error => {
+          this.loginRequestInProgress = false
+
           this.loginError = true
           console.log("Error: " + error.message)
           this.showLoginError(error.status)

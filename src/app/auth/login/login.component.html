@@ -54,4 +54,8 @@
       Submit
     </button>
   </div>
+
+  <div class="col-md-8 offset-md-4" *ngIf="loginRequestInProgress">
+    <mat-spinner></mat-spinner>
+  </div>
 </form>
