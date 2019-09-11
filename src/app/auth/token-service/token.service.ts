@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core"
+import { CookieService } from "ngx-cookie-service"
 
 const TOKEN = "token"
 
@@ -6,18 +7,21 @@ const TOKEN = "token"
   providedIn: "root"
 })
 export class TokenService {
-  constructor() {}
+  constructor(private cookieService: CookieService) {}
 
   saveToken(token: string) {
-    localStorage.setItem(TOKEN, token)
+    // localStorage.setItem(TOKEN, token)
+    this.cookieService.set(TOKEN, token)
   }
 
   getToken(): string {
-    return localStorage.getItem(TOKEN)
+    // return localStorage.getItem(TOKEN)
+    return this.cookieService.get(TOKEN)
   }
 
   deleteToken() {
-    localStorage.removeItem(TOKEN)
+    // localStorage.removeItem(TOKEN)
+    this.cookieService.delete(TOKEN)
   }
 
   getUser(): any {

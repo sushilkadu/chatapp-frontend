@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="toolbar_style">
+  <mat-toolbar-row>
+    <div class="container">
+      <div class="row">
+        <span>Chat App</span>
+
+        <!-- This fills the remaining space of the current row -->
+        <div class="example-fill-remaining-space">
+          <div class="profile_pic_div_style">
+            <img
+              src="https://via.placeholder.com/50"
+              class="rounded-circle"
+              alt="Cinque Terre"
+              style="margin: auto"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button mat-button (click)="onLogout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

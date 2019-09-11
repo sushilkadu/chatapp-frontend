@@ -9,6 +9,7 @@ import { SignUpComponent } from "./sign-up/sign-up.component"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { HttpClientModule } from "@angular/common/http"
 import { MiscModule } from "../misc/misc.module"
+import { CookieService } from "ngx-cookie-service"
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, SignUpComponent],
@@ -20,6 +21,8 @@ import { MiscModule } from "../misc/misc.module"
     MaterialModule,
     HttpClientModule,
     MiscModule
-  ]
+  ],
+
+  providers: [CookieService]
 })
 export class AuthModule {}

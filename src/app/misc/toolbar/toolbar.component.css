@@ -1,0 +1,15 @@
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.profile_pic_div_style {
+
+}
+
+.toolbar_style {
+  padding: 0px;
+}

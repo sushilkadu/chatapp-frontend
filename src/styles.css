@@ -5,8 +5,14 @@
 
 body {
   background-color: #f4f7f7;
+  margin: 0px;
+  padding: 0px;
 }
 
 .submit_button_style {
   width: 100%;
+}
+
+.border_test {
+  border: 3px solid green;
 }
