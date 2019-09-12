@@ -1,0 +1,39 @@
+<mat-card>
+  <div class="row">
+    <form [formGroup]="postForm" class="post-form" (ngSubmit)="onPostForm()">
+      <mat-form-field class="example-full-width">
+        <textarea
+          matInput
+          placeholder="Make your post!"
+          [formControl]="post"
+        ></textarea>
+        <mat-hint>What would you like to post today</mat-hint>
+      </mat-form-field>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <button
+            class="submit_button_style text-center "
+            mat-raised-button
+            color="primary"
+            style="margin-top: 20px;"
+          >
+            IMAGES
+          </button>
+        </div>
+        <div class="offset-sm-6 col-3">
+          <button
+            type="submit"
+            class="submit_button_style text-center "
+            mat-raised-button
+            color="primary"
+            [disabled]="postForm.invalid"
+            style="margin-top: 20px;"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-card>

@@ -1,3 +1,33 @@
-<div>
-  <p>{{ sideBarTitle }}</p>
+<div class="row">
+  <div class="col s12 m4" style="align-items: center">
+    <a>
+      <span>Posts</span>
+      <p style="text-align:center">10</p>
+    </a>
+  </div>
+  <div class="col s12 m4">
+    <a>
+      <span>Following</span>
+      <p style="text-align:center">10</p>
+    </a>
+  </div>
+  <div class="col s12 m4">
+    <a>
+      <span>Followers</span>
+      <p style="text-align:center">10</p>
+    </a>
+  </div>
 </div>
+<mat-list>
+  <mat-list-item *ngFor="let message of config" class="list-cell">
+    <mat-icon aria-hidden="false" aria-label="Forward arrow">{{
+      message.icon
+    }}</mat-icon>
+
+    <h2 matLine>{{ message.title }}</h2>
+    <p matLine>
+      <span> {{ message.subject }} </span>
+    </p>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

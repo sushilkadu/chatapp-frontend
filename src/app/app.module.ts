@@ -10,6 +10,8 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 
 import { HomeModule } from "./home/home.module"
 import { CookieService } from "ngx-cookie-service"
+import { TokenInterceptor } from "./misc/token-interceptor"
+import { HTTP_INTERCEPTORS } from "@angular/common/http"
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -24,6 +26,13 @@ import { CookieService } from "ngx-cookie-service"
 
   bootstrap: [AppComponent],
 
-  providers: [CookieService]
+  providers: [
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ]
 })
 export class AppModule {}

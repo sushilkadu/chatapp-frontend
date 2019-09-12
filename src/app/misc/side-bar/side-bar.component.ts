@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core"
+import { messages } from "./side-bar-config"
 
 @Component({
   selector: "app-side-bar",
@@ -6,13 +7,7 @@ import { Component, OnInit } from "@angular/core"
   styleUrls: ["./side-bar.component.css"]
 })
 export class SideBarComponent implements OnInit {
-  private _sideBarTitle = "This is sidebar title really"
-  public get sideBarTitle() {
-    return this._sideBarTitle
-  }
-  public set sideBarTitle(value) {
-    this._sideBarTitle = value
-  }
+  config = messages
 
   constructor() {}
 
